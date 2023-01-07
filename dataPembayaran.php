@@ -5,9 +5,10 @@
     $waktu = $_POST["waktu"];
     $status = $_POST["status"];
 
+    //menampilkan nama user
     $nama = query("SELECT namakonsumen FROM konsumen WHERE idkonsumen = '$idkonsumen'")[0];
 
-
+    // menampilkan data transaksi
     $trans = query("SELECT pembelian.idpembelian, namabarang, namakonsumen,jumlahbeli,harga,harga * jumlahbeli AS 'hargapembelian'
     FROM pembelian
     INNER JOIN konsumen
@@ -16,6 +17,7 @@
     ON pembelian.idbarang = inventoribarang.idbarang
     WHERE konsumen.idkonsumen = '$idkonsumen' AND DATE(waktu) = '$waktu' AND STATUS = '$status'");
 
+    // menghitung total transaksi
     $biayaTotal = query("SELECT SUM(harga * jumlahbeli) AS 'hargapembelian'
     FROM pembelian
     INNER JOIN konsumen
@@ -24,8 +26,23 @@
     ON pembelian.idbarang = inventoribarang.idbarang
     WHERE konsumen.idkonsumen = '$idkonsumen' AND DATE(waktu) = '$waktu' AND STATUS = '$status'")[0];
 
-    // var_dump($biayaTotal['hargapembelian']);
-    // die;
+    if (isset($_POST["bayar"])){
+        if(bayarStatusTransaksi($_POST) > 0) {
+            echo "
+                <script>
+                    alert('data berhasil diubah');
+                    document.location.href = 'transaksi.php'
+                </script>
+            ";
+        } else {
+            echo "
+                <script>
+                    alert('data gagal diubah');
+                    document.location.href = 'transaksi.php'
+                </script>
+            ";
+        }
+    }
 ?>
 
 
@@ -81,19 +98,6 @@
                                 HOME
                             </a>
 
-                            <div class="sb-sidenav-menu-heading">Interface</div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePegawai" aria-expanded="false" aria-controls="collapsePegawai">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Pegawai
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapsePegawai" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">Menampilkan Pegawai</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Menambah Pegawai</a>
-                                </nav>
-                            </div>
-
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseTransaksi" aria-expanded="false" aria-controls="collapseTransaksi">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 Transaksi
@@ -101,20 +105,9 @@
                             </a>
                             <div class="collapse" id="collapseTransaksi" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">Menampilkan Transaksi</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Menambah Transaksi</a>
-                                </nav>
-                            </div>
-
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseInventori" aria-expanded="false" aria-controls="collapseInventori">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Inventori
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseInventori" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">Menampilkan Inventori</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Menambah Inventori</a>
+                                    <a class="nav-link" href="transaksi.php">Menampilkan Transaksi</a>
+                                    <a class="nav-link" href="menambahTransaksi.php">Menambah Transaksi</a>
+                                    <a class="nav-link" href="menghitungTransaksi.php">Hitung Transaksi</a>
                                 </nav>
                             </div>
 
@@ -151,11 +144,15 @@
             </div>
             <div id="layoutSidenav_content">
                 <main>
+
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Menampilkan Data Pegawai</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Nama Konsumen : <?= $nama["namakonsumen"]?></li>
                             <li class="breadcrumb-item active">Waktu : <?= $waktu?></li>
+                        </ol>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">Status Pembayaran : <?= $status?></li>
                         </ol>
                         <div class="div">
                         <table class="table">
@@ -181,6 +178,15 @@
 
                         </table>
                         </div>
+                    </div>
+
+                    <div class="container-fluid px-4">
+                        <!-- form update -->
+                        <form action= "" method="POST">
+                            <input type="hidden" id="idpegawai" name="idpegawai" value= <?= $idkonsumen?> >
+                            <button type="submit" name="bayar" class="btn btn-primary">Bayar</button>
+                        </form>
+                        <!-- penutup form  -->
                     </div>
                     
 

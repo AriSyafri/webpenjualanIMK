@@ -19,20 +19,15 @@
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-                </div>
+                
             </form>
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i> User </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">Settings</a></li>
-                        <li><a class="dropdown-item" href="#!">Activity Log</a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#!">Logout</a></li>
+                        <li><a class="dropdown-item" href="login.php">Logout</a></li>
                     </ul>
                 </li>
             </ul>
@@ -71,6 +66,20 @@
                                     <a class="nav-link" href="transaksi.php">Menampilkan Transaksi</a>
                                     <a class="nav-link" href="menambahTransaksi.php">Menambah Transaksi</a>
                                     <a class="nav-link" href="menghitungTransaksi.php">Hitung Transaksi</a>
+                                </nav>
+                            </div>
+
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseTransaksiPer" aria-expanded="false" aria-controls="collapseTransaksiPer">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Pemasukan Transaksi
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseTransaksiPer" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="transaksiHari.php">Menampilkan Transaksi Harian</a>
+                                    <a class="nav-link" href="transaksiBulan.php">Menampilkan Transaksi Bulanan</a>
+                                    <a class="nav-link" href="transaksiTahun.php">Menampilkan Transaksi Tahunan</a>
+                                    
                                 </nav>
                             </div>
 
@@ -174,6 +183,16 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- jumbotron -->
+                        <div class="p-2 mb-4 rounded-4">
+                        <div class="container-fluid py-5 text-white bg-dark">
+                            <h5 class="fs-4">Custom jumbotron</h5>
+                            <p class="col-md-8 fs-6">Using a series of utilities, you can create this jumbotron, just like the one in previous versions of Bootstrap. Check out the examples below for how you can remix and restyle it to your liking.</p>
+                            <button class="btn btn-primary" type="button">Example button</button>
+                        </div>
+                        </div>
+                        <!-- jumbotron -->
                     </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">

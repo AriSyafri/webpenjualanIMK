@@ -1,7 +1,7 @@
 <?php
     require 'functions.php';
 
-    $trans = query("SELECT pembelian.idpembelian, namabarang, namakonsumen, jumlahbeli, DATE(waktu) AS waktu ,harga,harga * jumlahbeli AS 'harga pembelian'
+    $trans = query("SELECT pembelian.idpembelian, namabarang, konsumen.idkonsumen as idkonsumen,namakonsumen, jumlahbeli,status, DATE(waktu) AS waktu ,harga,harga * jumlahbeli AS 'harga pembelian'
                     FROM pembelian
                     INNER JOIN konsumen
                     ON pembelian.idkonsumen = konsumen.idkonsumen
@@ -64,19 +64,6 @@
                                 HOME
                             </a>
 
-                            <div class="sb-sidenav-menu-heading">Interface</div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePegawai" aria-expanded="false" aria-controls="collapsePegawai">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Pegawai
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapsePegawai" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">Menampilkan Data Pegawai</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Menambah Pegawai</a>
-                                </nav>
-                            </div>
-
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseTransaksi" aria-expanded="false" aria-controls="collapseTransaksi">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 Transaksi
@@ -84,20 +71,9 @@
                             </a>
                             <div class="collapse" id="collapseTransaksi" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">Menampilkan Transaksi</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Menambah Transaksi</a>
-                                </nav>
-                            </div>
-
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseInventori" aria-expanded="false" aria-controls="collapseInventori">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Inventori
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseInventori" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">Menampilkan Inventori</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Menambah Inventori</a>
+                                    <a class="nav-link" href="transaksi.php">Menampilkan Transaksi</a>
+                                    <a class="nav-link" href="menambahTransaksi.php">Menambah Transaksi</a>
+                                    <a class="nav-link" href="menghitungTransaksi.php">Hitung Transaksi</a>
                                 </nav>
                             </div>
 
@@ -143,29 +119,27 @@
                         <table class="table">
                         <thead>
                             <tr>
-                            <th scope="col">ID Pembelian</th>
                             <th scope="col">Waktu</th>
                             <th scope="col">Nama Barang</th>
                             <th scope="col">Nama Konsumen</th>
                             <th scope="col">Jumlah Beli</th>
                             <th scope="col">Harga</th>
+                            <th scope="col">Status Pembayaran</th>
                             <th scope="col" style="text-align: center;">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach($trans as $row) : ?>
                             <tr>
-                            <td><?= $row["idpembelian"]?></td>
                             <td><?= $row["waktu"]?></td>
                             <td><?= $row["namabarang"]?></td>
                             <td><?= $row["namakonsumen"]?></td>
                             <td><?= $row["jumlahbeli"]?></td>
                             <td><?= $row["harga pembelian"]?></td>
+                            <td><?= $row["status"]?></td>
                             <td style="text-align: center;">
-                                <a class="btn btn-secondary">Ubah</a> 
-                                <a class="btn btn-danger"> Hapus</a>
-                                <!-- <a class="btn btn-secondary" href="ubahkls.php?kodeKelas=<?= $row["kodeKelas"]; ?>">Ubah</a> 
-                                <a class="btn btn-danger" href="hapuskls.php?kodeKelas=<?= $row["kodeKelas"]; ?>"onclick="return confirm('yakin?');"> Hapus</a> -->
+                                <a class="btn btn-secondary" href="mengubahTransaksi.php?idpembelian=<?= $row["idpembelian"]; ?>">Ubah</a>
+                                <a class="btn btn-danger" href="hapusTransaksi.php?idpembelian=<?= $row["idpembelian"]; ?>"onclick="return confirm('yakin?');"> Hapus</a>
                             </td>
                         </tr>
                             <?php endforeach; ?>

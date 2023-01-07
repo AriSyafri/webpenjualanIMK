@@ -227,7 +227,56 @@
         mysqli_query($conn, $query);
         return mysqli_affected_rows($conn);
 
-    }   
+    }
+
+    function ubahtransaksi($data){
+        global $conn;
+
+        $id = htmlspecialchars($data["idpembelian"]);
+        $konsumen = htmlspecialchars($data["konsumen"]);
+        $status = htmlspecialchars($data["status"]);
+
+        $query = "UPDATE pembelian SET
+                idkonsumen  = '$konsumen',
+                status = '$status'
+            WHERE idpembelian = '$id'
+        ";
+
+        mysqli_query($conn, $query);
+        return mysqli_affected_rows($conn);
+    }
+
+    function hapusTransaksi($id){
+        global $conn;
+        mysqli_query($conn, "DELETE FROM pembelian WHERE idpembelian = '$id'");
+        return mysqli_affected_rows($conn);
+    }
+
+    function bayarStatusTransaksi($data) {
+        global $conn;
+        $id = htmlspecialchars($data["idpegawai"]);
+
+        $query = "UPDATE pembelian SET
+                    status = 'dibayar'
+                    WHERE idkonsumen = '$id'
+                "; 
+        mysqli_query($conn, $query);
+        return mysqli_affected_rows($conn);
+    }
+
+    function updateTransaksi($data) {
+        global $conn;
+
+        $barang = htmlspecialchars($data["barang"]);
+        $jBeli = htmlspecialchars($data["beli"]);
+
+        $query = "UPDATE inventoribarang
+                    SET stok = stok - '$jBeli'
+                WHERE idbarang = '$barang'
+            ";
+        mysqli_query($conn, $query);
+        return mysqli_affected_rows($conn);
+    }
 
 
 ?>

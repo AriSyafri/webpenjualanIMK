@@ -52,19 +52,6 @@
                                 HOME
                             </a>
 
-                            <div class="sb-sidenav-menu-heading">Interface</div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePegawai" aria-expanded="false" aria-controls="collapsePegawai">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Pegawai
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapsePegawai" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">Menampilkan Pegawai</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Menambah Pegawai</a>
-                                </nav>
-                            </div>
-
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseTransaksi" aria-expanded="false" aria-controls="collapseTransaksi">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 Transaksi
@@ -72,20 +59,9 @@
                             </a>
                             <div class="collapse" id="collapseTransaksi" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">Menampilkan Transaksi</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Menambah Transaksi</a>
-                                </nav>
-                            </div>
-
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseInventori" aria-expanded="false" aria-controls="collapseInventori">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Inventori
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseInventori" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">Menampilkan Inventori</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Menambah Inventori</a>
+                                    <a class="nav-link" href="transaksi.php">Menampilkan Transaksi</a>
+                                    <a class="nav-link" href="menambahTransaksi.php">Menambah Transaksi</a>
+                                    <a class="nav-link" href="menghitungTransaksi.php">Hitung Transaksi</a>
                                 </nav>
                             </div>
 
@@ -123,7 +99,7 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Menambah Transaksi</h1>
+                        <h1 class="mt-4">Menghitung Transaksi</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Silahkan Masukan Data Transaksi</li>
                         </ol>
@@ -150,7 +126,7 @@
                                 <select class="form-select" aria-label="Default select example" name="waktu" id="waktu">
                                 <option selected>Silahkan Pilih Waktu</option>
                                 <?php
-                                    $search = mysqli_query($conn, "SELECT DATE(waktu) as waktu FROM pembelian");
+                                    $search = mysqli_query($conn, "SELECT DATE(waktu) as waktu FROM pembelian GROUP BY DATE(waktu) ORDER BY DATE(waktu) DESC");
                                     while ($datakonsumen = mysqli_fetch_assoc($search)) :
                                 ?>
                                 <option value="<?= $datakonsumen["waktu"]?>"><?= $datakonsumen["waktu"]?></option>
@@ -163,6 +139,7 @@
                                 <select class="form-select" aria-label="Default select example" name="status" id="status">
                                 <option selected>Silahkan Pilih</option>
                                 <option value="belum dibayar">belum dibayar</option>
+                                <option value="dibayar">dibayar</option>
                                 </select>
                             </div>
 

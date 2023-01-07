@@ -71,40 +71,15 @@
                                 HOME
                             </a>
 
-                            <div class="sb-sidenav-menu-heading">Interface</div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePegawai" aria-expanded="false" aria-controls="collapsePegawai">
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseKonsumen" aria-expanded="false" aria-controls="collapseInventori">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Pegawai
+                                Konsumen
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                            <div class="collapse" id="collapsePegawai" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <div class="collapse" id="collapseKonsumen" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">Menampilkan Pegawai</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Menambah Pegawai</a>
-                                </nav>
-                            </div>
-
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseTransaksi" aria-expanded="false" aria-controls="collapseTransaksi">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Transaksi
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseTransaksi" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">Menampilkan Transaksi</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Menambah Transaksi</a>
-                                </nav>
-                            </div>
-
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseInventori" aria-expanded="false" aria-controls="collapseInventori">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Inventori
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseInventori" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">Menampilkan Inventori</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Menambah Inventori</a>
+                                    <a class="nav-link" href="konsumen.php">Menampilkan Konsumen</a>
+                                    <a class="nav-link" href="menambahKonsumen.php">Menambah Konsumen</a>
                                 </nav>
                             </div>
 

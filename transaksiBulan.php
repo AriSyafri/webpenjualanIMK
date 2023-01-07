@@ -1,29 +1,15 @@
 <?php
     require 'functions.php';
-    $var = $_GET["idpegawai"];
-    $pegawai = query("SELECT * FROM pegawai WHERE idpegawai = '$var'")[0];
 
-    if (isset($_POST["submit"])){
-        if(ubahPegawai($_POST) > 0) {
-            echo "
-                <script>
-                    alert('data berhasil diubah');
-                    document.location.href = 'pegawai.php'
-                </script>
-            ";
-        } else {
-            echo "
-                <script>
-                    alert('data gagal diubah');
-                    document.location.href = 'pegawai.php'
-                </script>
-            ";
-        }
-    }
-
+    $trans = query("SELECT DATE_FORMAT(waktu, '%M %Y') AS waktu ,SUM(harga * jumlahbeli) AS 'jumlah'
+                FROM pembelian
+                INNER JOIN konsumen
+                ON pembelian.idkonsumen = konsumen.idkonsumen
+                INNER JOIN inventoribarang
+                ON pembelian.idbarang = inventoribarang.idbarang
+                GROUP BY MONTH(waktu)
+                ORDER BY DATE(waktu)");
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -33,7 +19,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Inventori Barang</title>
+        <title>Transaksi Barang</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -46,6 +32,9 @@
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0" action="" method="post">
+                <div class="input-group">
+                    <input class="form-control" type="text" placeholder="Masukkan keyword" name="keyword" aria-label="" aria-describedby="btnNavbarSearch" />
+                    <button class="btn btn-primary" id="cari" type="submit" name="cari"><i class="fas fa-search"></i></button>
             </form>
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
@@ -71,40 +60,17 @@
                                 HOME
                             </a>
 
-                            <div class="sb-sidenav-menu-heading">Interface</div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePegawai" aria-expanded="false" aria-controls="collapsePegawai">
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseTransaksiPer" aria-expanded="false" aria-controls="collapseTransaksiPer">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Pegawai
+                                Pemasukan Transaksi
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                            <div class="collapse" id="collapsePegawai" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <div class="collapse" id="collapseTransaksiPer" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">Menampilkan Pegawai</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Menambah Pegawai</a>
-                                </nav>
-                            </div>
-
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseTransaksi" aria-expanded="false" aria-controls="collapseTransaksi">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Transaksi
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseTransaksi" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">Menampilkan Transaksi</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Menambah Transaksi</a>
-                                </nav>
-                            </div>
-
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseInventori" aria-expanded="false" aria-controls="collapseInventori">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Inventori
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseInventori" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">Menampilkan Inventori</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Menambah Inventori</a>
+                                    <a class="nav-link" href="transaksiHari.php">Menampilkan Transaksi Harian</a>
+                                    <a class="nav-link" href="transaksiBulan.php">Menampilkan Transaksi Bulanan</a>
+                                    <a class="nav-link" href="transaksiTahun.php">Menampilkan Transaksi Tahunan</a>
+                                    
                                 </nav>
                             </div>
 
@@ -142,47 +108,28 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Mengubah Pegawai</h1>
+                        <h1 class="mt-4">Menampilkan Data Transaksi</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Silahkan Masukan Data Pegawai</li>
+                            <li class="breadcrumb-item active">Data Transaksi</li>
                         </ol>
-                        
-                        <!-- form menambah -->
-
-                        <form action= "" method="POST">
-
-                            <input type="hidden" id="idpegawai" name="idpegawai" value="<?= $pegawai["idpegawai"]; ?>">
-
-                            <div class="mb-3">
-                                <label for="namapegawai" class="form-label">Masukkan Nama Pegawai</label>
-                                <input type="text" class="form-control" id="namapegawai" name="namapegawai" value="<?= $pegawai["namapegawai"]; ?>">
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="alamat" class="form-label">Masukkan Alamat Pegawai</label>
-                                <input type="text" class="form-control" id="alamat" name="alamat" value="<?= $pegawai["alamat"]; ?>">
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="nohp" class="form-label">Masukkan No HP Pegawai</label>
-                                <input type="text" class="form-control" id="nohp" name="nohp" value="<?= $pegawai["nohp"]; ?>">
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="pegawai" class="form-label">Pilih Role Pegawai</label>
-                                <select class="form-select" aria-label="Default select example" name="role" id="role">
-                                    <!-- <option value="owner" <?= ($pegawai["role"] == "owner")? "selected" : "" ?> >Owner</option> -->
-                                    <option value="kasir" <?= ($pegawai["role"] == "kasir")? "selected" : "" ?> >Kasir</option>
-                                    <option value="pegawai" <?= ($pegawai["role"] == "pegawai")? "selected" : "" ?> >Pegawai</option>
-                                    <option value="spv" <?= ($pegawai["role"] == "spv")? "selected" : "" ?> >Supervisor</option>
-
-                                </select>
-                            </div>
-                            
-                            <button type="submit" name="submit" class="btn btn-primary">Submit</button>
-                        </form>
-                        <!-- form menambah -->
-
+                        <div class="div">
+                        <table class="table">
+                        <thead>
+                            <tr>
+                            <th scope="col">Waktu</th>
+                            <th scope="col">Jumlah</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach($trans as $row) : ?>
+                            <tr>
+                            <td><?= $row["waktu"]?></td>
+                            <td><?= $row["jumlah"]?></td>
+                        </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                        </table>
+                        </div>
                     </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">

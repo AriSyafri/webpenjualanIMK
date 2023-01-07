@@ -1,27 +1,29 @@
 <?php
     require 'functions.php';
-    $var = $_GET["idpegawai"];
-    $pegawai = query("SELECT * FROM pegawai WHERE idpegawai = '$var'")[0];
+
+    $var = $_GET["idpembelian"];
+    $trans = query("SELECT * FROM pembelian WHERE idpembelian = '$var'")[0];
 
     if (isset($_POST["submit"])){
-        if(ubahPegawai($_POST) > 0) {
+        if(ubahtransaksi($_POST) > 0) {
             echo "
                 <script>
-                    alert('data berhasil diubah');
-                    document.location.href = 'pegawai.php'
+                    alert('data berhasil ditambahkan');
+                    document.location.href = 'transaksi.php'
                 </script>
             ";
         } else {
             echo "
                 <script>
-                    alert('data gagal diubah');
-                    document.location.href = 'pegawai.php'
+                    alert('data gagal ditambahkan');
+                    document.location.href = 'transaksi.php'
                 </script>
             ";
         }
     }
 
 ?>
+
 
 
 
@@ -33,7 +35,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Inventori Barang</title>
+        <title>Menambah Transaksi</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -71,19 +73,6 @@
                                 HOME
                             </a>
 
-                            <div class="sb-sidenav-menu-heading">Interface</div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePegawai" aria-expanded="false" aria-controls="collapsePegawai">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Pegawai
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapsePegawai" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">Menampilkan Pegawai</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Menambah Pegawai</a>
-                                </nav>
-                            </div>
-
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseTransaksi" aria-expanded="false" aria-controls="collapseTransaksi">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 Transaksi
@@ -91,20 +80,9 @@
                             </a>
                             <div class="collapse" id="collapseTransaksi" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">Menampilkan Transaksi</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Menambah Transaksi</a>
-                                </nav>
-                            </div>
-
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseInventori" aria-expanded="false" aria-controls="collapseInventori">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Inventori
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseInventori" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">Menampilkan Inventori</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Menambah Inventori</a>
+                                    <a class="nav-link" href="transaksi.php">Menampilkan Transaksi</a>
+                                    <a class="nav-link" href="menambahTransaksi.php">Menambah Transaksi</a>
+                                    <a class="nav-link" href="menghitungTransaksi.php">Hitung Transaksi</a>
                                 </nav>
                             </div>
 
@@ -142,43 +120,42 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Mengubah Pegawai</h1>
+                        <h1 class="mt-4">Menambah Transaksi</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Silahkan Masukan Data Pegawai</li>
+                            <li class="breadcrumb-item active">Silahkan Masukan Data Transaksi</li>
                         </ol>
                         
                         <!-- form menambah -->
 
                         <form action= "" method="POST">
 
-                            <input type="hidden" id="idpegawai" name="idpegawai" value="<?= $pegawai["idpegawai"]; ?>">
+                            <input type="hidden" id="idpembelian" name="idpembelian" value="<?= $trans["idpembelian"]; ?>">
 
                             <div class="mb-3">
-                                <label for="namapegawai" class="form-label">Masukkan Nama Pegawai</label>
-                                <input type="text" class="form-control" id="namapegawai" name="namapegawai" value="<?= $pegawai["namapegawai"]; ?>">
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="alamat" class="form-label">Masukkan Alamat Pegawai</label>
-                                <input type="text" class="form-control" id="alamat" name="alamat" value="<?= $pegawai["alamat"]; ?>">
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="nohp" class="form-label">Masukkan No HP Pegawai</label>
-                                <input type="text" class="form-control" id="nohp" name="nohp" value="<?= $pegawai["nohp"]; ?>">
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="pegawai" class="form-label">Pilih Role Pegawai</label>
-                                <select class="form-select" aria-label="Default select example" name="role" id="role">
-                                    <!-- <option value="owner" <?= ($pegawai["role"] == "owner")? "selected" : "" ?> >Owner</option> -->
-                                    <option value="kasir" <?= ($pegawai["role"] == "kasir")? "selected" : "" ?> >Kasir</option>
-                                    <option value="pegawai" <?= ($pegawai["role"] == "pegawai")? "selected" : "" ?> >Pegawai</option>
-                                    <option value="spv" <?= ($pegawai["role"] == "spv")? "selected" : "" ?> >Supervisor</option>
-
+                                <label for="konsumen" class="form-label">Pilih Konsumen</label>
+                                <select class="form-select" aria-label="Default select example" name="konsumen" id="konsumen">
+                                <option selected>Silahkan Pilih Konsumen</option>
+                                <?php
+                                    $search = mysqli_query($conn, "SELECT * FROM konsumen");
+                                    while ($datakonsumen = mysqli_fetch_assoc($search)) :
+                                        if($datakonsumen["idkonsumen"] == $trans["idkonsumen"]) {
+                                            print '<option value="'.$trans["idkonsumen"].'" class="text-primary" selected>'.$datakonsumen["namakonsumen"].'</option>';
+                                        } else {
+                                            print '<option value="'.$datakonsumen["idkonsumen"].'">'.$datakonsumen["namakonsumen"].'</option>';
+                                        }
+                                ?>
+                                <?php endwhile ?>
                                 </select>
                             </div>
-                            
+
+                            <div class="mb-3">
+                                <label for="pegawai" class="form-label">Pilih Status Penjualan</label>
+                                <select class="form-select" aria-label="Default select example" name="status" id="status">
+                                <option value="dibayar" <?= ($trans["status"] == "dibayar")? "selected" : "" ?> >Dibayar</option>
+                                <option value="belum dibayar" <?= ($trans["status"] == "belum dibayar")? "selected" : "" ?> >Belum Bayar</option>
+                                </select>
+                            </div>
+
                             <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                         </form>
                         <!-- form menambah -->

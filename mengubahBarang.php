@@ -183,7 +183,6 @@
                                             print '<option value="'.$datapegawai["idpegawai"].'">'.$datapegawai["namapegawai"].'</option>';
                                         }
                                 ?>
-                                <!-- <option value="<?= $datapegawai["idpegawai"]?>"><?= $datapegawai["namapegawai"]?></option> -->
                                 <?php endwhile ?>
                                 </select>
                             </div>
