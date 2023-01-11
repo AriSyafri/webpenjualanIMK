@@ -1,13 +1,19 @@
 <?php
+    session_start();
+    if( !isset($_SESSION["login"]) ) {
+        header("Location: login.php");
+        exit;
+    }
+
     require 'functions.php';
 
-    $trans = query("SELECT pembelian.idpembelian, namabarang, konsumen.idkonsumen as idkonsumen,namakonsumen, jumlahbeli,status, DATE(waktu) AS waktu ,harga,harga * jumlahbeli AS 'harga pembelian'
+    $trans = query("SELECT pembelian.idpembelian, namabarang, konsumen.idkonsumen as idkonsumen,namakonsumen, waktu AS wkt,jumlahbeli,status, DATE(waktu) AS waktu ,harga,harga * jumlahbeli AS 'harga pembelian'
                     FROM pembelian
                     INNER JOIN konsumen
                     ON pembelian.idkonsumen = konsumen.idkonsumen
                     INNER JOIN inventoribarang
                     ON pembelian.idbarang = inventoribarang.idbarang
-                    ORDER BY DATE(waktu) DESC");
+                    ORDER BY wkt DESC");
     // aksi cari
     if(isset($_POST["cari"])){
         $trans = cariTrans($_POST["keyword"]); 

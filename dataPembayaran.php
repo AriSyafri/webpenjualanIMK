@@ -30,14 +30,14 @@
         if(bayarStatusTransaksi($_POST) > 0) {
             echo "
                 <script>
-                    alert('data berhasil diubah');
+                    alert('Pembayaran berhasil');
                     document.location.href = 'transaksi.php'
                 </script>
             ";
         } else {
             echo "
                 <script>
-                    alert('data gagal diubah');
+                    alert('Pembayaran gagal');
                     document.location.href = 'transaksi.php'
                 </script>
             ";

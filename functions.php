@@ -48,7 +48,7 @@
     }
 
     function cariTrans($keyword) {
-        $query = "SELECT pembelian.idpembelian, namabarang, namakonsumen, jumlahbeli, DATE(waktu) AS waktu ,harga,harga * jumlahbeli AS 'harga pembelian'
+        $query = "SELECT pembelian.idpembelian, namabarang, status,namakonsumen, jumlahbeli, DATE(waktu) AS waktu ,harga,harga * jumlahbeli AS 'harga pembelian'
         FROM pembelian
         INNER JOIN konsumen
         ON pembelian.idkonsumen = konsumen.idkonsumen
@@ -270,10 +270,21 @@
         $barang = htmlspecialchars($data["barang"]);
         $jBeli = htmlspecialchars($data["beli"]);
 
+        $barangCari = query("SELECT * FROM inventoribarang WHERE idbarang = '$barang'")[0];
+
+        //validasi jika kurang
+        if (($barangCari["stok"] - $jBeli) < 0) {
+            echo "<script>
+                    alert('nilai stok kurang dari jumlah beli')
+                </script>";
+            return false;
+        }
+
         $query = "UPDATE inventoribarang
                     SET stok = stok - '$jBeli'
                 WHERE idbarang = '$barang'
             ";
+
         mysqli_query($conn, $query);
         return mysqli_affected_rows($conn);
     }

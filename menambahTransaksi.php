@@ -1,10 +1,10 @@
 <?php
     require 'functions.php';
 
-
     if (isset($_POST["submit"])){
-        if(tambahtransaksi($_POST) > 0) {
-            updateTransaksi($_POST);
+        
+        if(updateTransaksi($_POST) > 0) {
+            tambahtransaksi($_POST);
             echo "
                 <script>
                     alert('data berhasil ditambahkan');
@@ -20,6 +20,7 @@
             ";
         }
     }
+
 
 ?>
 
