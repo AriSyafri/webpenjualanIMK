@@ -5,6 +5,8 @@
         exit;
     }
 
+    
+
     // manggil fungsi
     require 'functions.php';
 

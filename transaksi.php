@@ -5,6 +5,8 @@
         exit;
     }
 
+    $role = $_SESSION["role"];
+
     require 'functions.php';
 
     $trans = query("SELECT pembelian.idpembelian, namabarang, konsumen.idkonsumen as idkonsumen,namakonsumen, waktu AS wkt,jumlahbeli,status, DATE(waktu) AS waktu ,harga,harga * jumlahbeli AS 'harga pembelian'
@@ -144,9 +146,15 @@
                             <td><?= $row["jumlahbeli"]?></td>
                             <td>RP. <?= $row["harga pembelian"]?></td>
                             <td><?= $row["status"]?></td>
+
                             <td style="text-align: center;">
-                                <a class="btn btn-secondary" href="mengubahTransaksi.php?idpembelian=<?= $row["idpembelian"]; ?>"><i class="bi bi-pencil-fill"></i></a>
-                                <a class="btn btn-danger" href="hapusTransaksi.php?idpembelian=<?= $row["idpembelian"]; ?>"onclick="return confirm('yakin?');"> <i class="bi bi-trash-fill"></i></a>
+                                <?php if ($role != "spv") { ?>
+                                    <button type="button" class="btn btn-secondary" disabled><i class="bi bi-pencil-fill"></i></button>
+                                    <button type="button" class="btn btn-danger" disabled><i class="bi bi-trash-fill"></i></button>
+                                <?php } else { ?>
+                                    <a class="btn btn-secondary" href="mengubahTransaksi.php?idpembelian=<?= $row["idpembelian"]; ?>"><i class="bi bi-pencil-fill"></i></a>
+                                    <a class="btn btn-danger" href="hapusTransaksi.php?idpembelian=<?= $row["idpembelian"]; ?>"onclick="return confirm('yakin?');"> <i class="bi bi-trash-fill"></i></a>
+                                <?php }?>
                             </td>
                         </tr>
                             <?php endforeach; ?>
@@ -158,12 +166,7 @@
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2022</div>
-                            <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
-                            </div>
+                            <div class="text-muted">Copyright &copy; Kelompok 4 IF-2</div>
                         </div>
                     </div>
                 </footer>
