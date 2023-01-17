@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 11, 2023 at 04:28 AM
+-- Generation Time: Jan 17, 2023 at 03:56 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -62,7 +62,7 @@ CREATE TABLE `konsumen` (
 --
 
 INSERT INTO `konsumen` (`idkonsumen`, `namakonsumen`, `nohp`) VALUES
-(1, 'Ujang Asep', '0000000'),
+(1, 'Ujang Asep', '000000'),
 (2, 'Yeni Indriani', '0432828'),
 (3, 'Tessia Eralith', '098777'),
 (4, 'Reni Sugwerni', '08777'),
@@ -88,9 +88,11 @@ CREATE TABLE `pegawai` (
 --
 
 INSERT INTO `pegawai` (`idpegawai`, `pass`, `namapegawai`, `role`, `alamat`, `nohp`) VALUES
-('admin', '$2a$12$7HyR8oUo9wW/z1Vj3L2iLOtInSgd2r7hfjMB2nQ6LT/O73qCPBVSe', 'admin', 'spv', 'admin', 'admin'),
+('12345', '$2y$10$84uhRTw1X/E2A6MzGN4fye72.SM.v8epvBhJs4bxLta.QQvyPUSNG', 'Suryanti Yantii', 'kasir', '12345', '12345'),
+('admin', '$2a$12$7HyR8oUo9wW/z1Vj3L2iLOtInSgd2r7hfjMB2nQ6LT/O73qCPBVSe', 'admin', 'owner', 'admin', 'admin'),
 ('ari', '$2y$10$hWkcX0sxe0nJZApV8oAOkuTQVqk9snxAI1F0It9j09xpW9Asq3wQ.', 'ari', 'pegawai', 'ari', '098777'),
-('tes', '$2y$10$nrWFISNtER2rqFKteNtvXOCSTs5g7EJo0bY6Bhs0QPJgOYTeyGnvW', 'tes', 'owner', 'tes', 'tes');
+('kasir05', '$2y$10$ESRTTR7RhU2Pkpw2GhyUW.ZUgTkHC3tjP7BCOlMLMBbmIAWw6bUKG', 'Ujang', 'spv', 'Jl Suka Rasa', '08777'),
+('tes', '$2y$10$nrWFISNtER2rqFKteNtvXOCSTs5g7EJo0bY6Bhs0QPJgOYTeyGnvW', 'tes', 'pegawai', 'tes', 'tes');
 
 -- --------------------------------------------------------
 
@@ -138,8 +140,8 @@ INSERT INTO `pembelian` (`idpembelian`, `waktu`, `jumlahbeli`, `idbarang`, `idko
 (30, '2023-01-07 10:34:02', 15, 'R001', 1, 'dibayar'),
 (31, '2023-01-07 10:35:52', 15, 'R001', 2, 'belum dibayar'),
 (32, '2023-01-07 10:38:26', 11, 'R001', 3, 'belum dibayar'),
-(33, '2023-01-07 10:39:13', 15, 'R001', 7, 'belum dibayar'),
-(34, '2023-01-07 10:48:45', 2, 'R001', 1, 'dibayar');
+(33, '2023-01-07 10:39:13', 15, 'R001', 7, 'dibayar'),
+(34, '2023-01-07 10:48:45', 2, 'R001', 1, 'belum dibayar');
 
 --
 -- Indexes for dumped tables
