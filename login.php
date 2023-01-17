@@ -89,7 +89,7 @@
 
 
             <div class="text-center text-lg-start mt-4 pt-2">
-                <button type="submit" name="login" class="btn btn-primary btn-lg"
+                <button type="submit" name="login" class="btn btn-warning btn-lg"
                 style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
             </div>
 
