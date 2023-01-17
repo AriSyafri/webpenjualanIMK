@@ -5,12 +5,6 @@
         exit;
     }
 
-    require 'functions.php';
-
-    $pegawai = query("SELECT COUNT(idpegawai) as pegawai FROM pegawai")[0];
-    $barang = query("SELECT COUNT(idbarang) as barang FROM inventoribarang")[0];
-    $konsumen = query("SELECT COUNT(idkonsumen)  as konsumen FROM konsumen")[0];
-
 ?>
 
 
@@ -25,14 +19,12 @@
         <title>Dashboard Penjualan</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
-        <!-- icon -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <nav class="sb-topnav navbar navbar-expand" style="background-color: #FFBF00;">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.html">Toko AnekaSuka</a>
+            <a class="navbar-brand ps-3" href="index.html">Start Bootstrap</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -55,15 +47,15 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <div class="sb-sidenav-menu-heading">Halaman Utama</div>
+                            <div class="sb-sidenav-menu-heading">Core</div>
                             <a class="nav-link" href="index.php">
-                                <div class="sb-nav-link-icon"><i class="bi bi-house-door-fill"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 HOME
                             </a>
 
-                            <div class="sb-sidenav-menu-heading">Menu</div>
+                            <div class="sb-sidenav-menu-heading">Interface</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePegawai" aria-expanded="false" aria-controls="collapsePegawai">
-                                <div class="sb-nav-link-icon"><i class="bi bi-people"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 Pegawai
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
@@ -75,7 +67,7 @@
                             </div>
 
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseTransaksi" aria-expanded="false" aria-controls="collapseTransaksi">
-                                <div class="sb-nav-link-icon"><i class="bi bi-currency-dollar"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 Transaksi
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
@@ -88,7 +80,7 @@
                             </div>
 
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseTransaksiPer" aria-expanded="false" aria-controls="collapseTransaksiPer">
-                                <div class="sb-nav-link-icon"><i class="bi bi-cash"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 Pemasukan Transaksi
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
@@ -102,7 +94,7 @@
                             </div>
 
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseInventori" aria-expanded="false" aria-controls="collapseInventori">
-                                <div class="sb-nav-link-icon"><i class="bi bi-check2-square"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 Inventori
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
@@ -114,7 +106,7 @@
                             </div>
 
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseKonsumen" aria-expanded="false" aria-controls="collapseInventori">
-                                <div class="sb-nav-link-icon"><i class="bi bi-people-fill"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 Konsumen
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
@@ -163,51 +155,51 @@
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">HOME</li>
                         </ol>
-
-                        <!-- bagian card -->
-
-                        <div class="row text-white justify-content-center">
-
-                        <div class="card bg-warning d-inline-block ms-3 mb-2" style="width: 20rem;">
-                        <div class="card-body">
-                            <div class="card-body-icon">
-                            <i class="bi bi-people-fill"></i>
+                        <div class="row">
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-primary text-white mb-4">
+                                    <div class="card-body">Jumlah Pegawai</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="#">View Details</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
                             </div>
-                            <h5 class="card-title">jumlah Pegawai</h5>
-                            <div class="display-4"><?= $pegawai["pegawai"];?></div>
-                        </div>
-                        </div>
-
-                        <div class="card bg-warning d-inline-block ms-3 mb-2" style="width: 20rem;">
-                        <div class="card-body">
-                            <div class="card-body-icon">
-                            <i class="bi bi-people"></i>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-warning text-white mb-4">
+                                    <div class="card-body">Jumlah Konsumen</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="#">View Details</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
                             </div>
-                            <h5 class="card-title">Jumlah Konsumen</h5>
-                            <div class="display-4"><?= $konsumen["konsumen"];?></div>
-                        </div>
-                        </div>
-
-                        <div class="card bg-warning d-inline-block ms-3 mb-2" style="width: 20rem;">
-                        <div class="card-body">
-                            <div class="card-body-icon">
-                            <i class="bi bi-cart"></i>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-success text-white mb-4">
+                                    <div class="card-body">Jumlah Barang</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="#">View Details</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
                             </div>
-                            <h5 class="card-title">Jumlah barang</h5>
-                            <div class="display-4"><?= $pegawai["pegawai"];?></div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-danger text-white mb-4">
+                                    <div class="card-body">Total Pemasukan</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="#">View Details</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        </div>
-
-                        </div>
-                        <!-- penutup card -->
-
 
                         <!-- jumbotron -->
                         <div class="p-2 mb-4 rounded-4">
                         <div class="container-fluid py-5 text-white bg-dark">
-                            <h5 class="fs-4">Selamat Datang Di Web Penjualan</h5>
-                            <p class="col-md-8 fs-6">Silahkan pilih sesuai role dan website ini digunakan agar dapat mempermudah dalam kegiatan penjualan Toko AnekaSuka</p>
-                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi culpa quis aut accusamus debitis excepturi qui neque. Totam corporis non fugiat tempora atque architecto, cumque sed suscipit pariatur fuga!</p>
+                            <h5 class="fs-4">Custom jumbotron</h5>
+                            <p class="col-md-8 fs-6">Using a series of utilities, you can create this jumbotron, just like the one in previous versions of Bootstrap. Check out the examples below for how you can remix and restyle it to your liking.</p>
+                            <button class="btn btn-primary" type="button">Example button</button>
                         </div>
                         </div>
                         <!-- jumbotron -->
@@ -216,13 +208,17 @@
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Kelompok 4 IF-2</div>
+                            <div class="text-muted">Copyright &copy; Your Website 2022</div>
+                            <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
                         </div>
                     </div>
                 </footer>
             </div>
         </div>
-        
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
