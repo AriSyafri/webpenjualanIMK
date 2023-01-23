@@ -169,7 +169,7 @@
                                 <input type="text" class="form-control" id="beli" name="beli">
                             </div>
 
-                            <button type="submit" name="submit" class="btn btn-warning">Periksa</button>
+                            <button type="submit" name="submit" class="btn btn-warning">Simpan</button>
                             <a href="menghitungTransaksi.php" class="btn btn-dark">Hitung Transaksi</a>
                             <a href="transaksi.php" class="btn btn-secondary">Batal</a>
                         </form>

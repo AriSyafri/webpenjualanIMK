@@ -150,7 +150,7 @@
                                 </select>
                             </div>
 
-                            <button type="submit" name="submit" class="btn btn-warning">Simpan</button>
+                            <button type="submit" name="submit" class="btn btn-warning">Periksa</button>
                             <a href="transaksi.php" button type="submit" name="submit" class="btn btn-secondary">Batal</a>
                         </form>
                         <!-- form menambah -->
