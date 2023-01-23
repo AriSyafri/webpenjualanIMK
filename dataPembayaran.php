@@ -211,8 +211,16 @@
                     <div class="container-fluid px-4">
                         <!-- form update -->
                         <form action= "" method="POST">
-                            <input type="hidden" id="idpegawai" name="idpegawai" value= <?= $idkonsumen?> >
-                            <button type="submit" name="bayar" class="btn btn-primary">Bayar</button>
+                            <?php
+                            if ($status == "belum dibayar") { ?>
+                                <input type="hidden" id="idpegawai" name="idpegawai" value= <?= $idkonsumen?> >
+                                <button type="submit" name="bayar" class="btn btn-warning">Bayar</button>
+
+                            <?php } ?>
+                            <!-- <input type="hidden" id="idpegawai" name="idpegawai" value= <?= $idkonsumen?> >
+                            <button type="submit" name="bayar" class="btn btn-warning">Bayar</button> -->
+                            <a href="transaksi.php" class="btn btn-secondary">Kembali</a>
+
                         </form>
                         <!-- penutup form  -->
                     </div>

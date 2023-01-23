@@ -163,7 +163,7 @@
                             </div>
                             
                             <button type="submit" name="submit" class="btn btn-warning">Simpan</button>
-                            <a href="barang.php" button type="submit" name="submit" class="btn btn-secondary">Batal</a>
+                            <a href="barang.php" class="btn btn-secondary">Batal</a>
                         </form>
                         <!-- form menambah -->
 
