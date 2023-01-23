@@ -14,7 +14,6 @@
             tambahtransaksi($_POST);
             echo "
                 <script>
-                    alert('data berhasil ditambahkan');
                     document.location.href = 'transaksi.php'
                 </script>
             ";
@@ -22,7 +21,7 @@
             echo "
                 <script>
                     alert('data gagal ditambahkan');
-                    document.location.href = 'transaksi.php'
+                    document.location.href = 'menambahTransaksi.php'
                 </script>
             ";
         }
@@ -140,7 +139,7 @@
                             <div class="mb-3">
                                 <label for="barang" class="form-label">Pilih Barang</label>
                                 <select class="form-select" aria-label="Default select example" name="barang" id="barang">
-                                <option selected>Silahkan Pilih Barang</option>
+                                <option value="0" selected>Silahkan Pilih Barang</option>
                                 <?php
                                     $search = mysqli_query($conn, "SELECT * FROM inventoribarang");
                                     while ($databarang = mysqli_fetch_assoc($search)) :
@@ -153,7 +152,7 @@
                             <div class="mb-3">
                                 <label for="konsumen" class="form-label">Pilih Konsumen</label>
                                 <select class="form-select" aria-label="Default select example" name="konsumen" id="konsumen">
-                                <option selected>Silahkan Pilih Konsumen</option>
+                                <option value="0" selected>Silahkan Pilih Konsumen</option>
                                 <?php
                                     $search = mysqli_query($conn, "SELECT * FROM konsumen");
                                     while ($datakonsumen = mysqli_fetch_assoc($search)) :
@@ -171,6 +170,7 @@
                             </div>
 
                             <button type="submit" name="submit" class="btn btn-warning">Simpan</button>
+                            <a href="transaksi.php" button type="submit" name="submit" class="btn btn-secondary">Batal</a>
                         </form>
                         <!-- form menambah -->
 

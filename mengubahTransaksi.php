@@ -162,6 +162,7 @@
                             </div>
 
                             <button type="submit" name="submit" class="btn btn-warning">simpan</button>
+                            <a href="transaksi.php" button type="submit" name="submit" class="btn btn-secondary">Batal</a>
                         </form>
                         <!-- form menambah -->
 

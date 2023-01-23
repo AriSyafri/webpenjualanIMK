@@ -130,7 +130,7 @@
                         <table class="table">
                         <thead>
                             <tr>
-                            <th scope="col">ID Pegawai</th>
+                            <th scope="col">Username</th>
                             <th scope="col">Nama Pegawai</th>
                             <th scope="col">Jabatan</th>
                             <th scope="col">Alamat</th>
@@ -148,7 +148,7 @@
                             <td><?= $row["nohp"]?></td>
                             <td style="text-align: center;">
                                 <!-- <a class="btn btn-secondary">Ubah</a>  -->
-                                <a class="btn btn-secondary" href="mengubahPegawai.php?idpegawai=<?= $row["idpegawai"]; ?>"><i class="bi bi-pencil-fill"></i></a> 
+                                <a class="btn btn-success" href="mengubahPegawai.php?idpegawai=<?= $row["idpegawai"]; ?>"><i class="bi bi-pencil-fill"></i></a> 
                                 <!-- <a class="btn btn-danger"> Hapus</a> -->
                                 <a class="btn btn-danger" href="hapusPegawai.php?idpegawai=<?= $row["idpegawai"]; ?>"onclick="return confirm('yakin?');"> <i class="bi bi-trash-fill"></i></a>
                             </td>

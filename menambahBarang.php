@@ -154,7 +154,7 @@
                                 <select class="form-select" aria-label="Default select example" name="idpegawai" id="idpegawai">
                                 <option selected>Silahkan Pilih</option>
                                 <?php
-                                    $search = mysqli_query($conn, "SELECT * FROM pegawai");
+                                    $search = mysqli_query($conn, "SELECT * FROM pegawai WHERE role = 'pegawai'");
                                     while ($datapegawai = mysqli_fetch_assoc($search)) :
                                 ?>
                                 <option value="<?= $datapegawai["idpegawai"]?>"><?= $datapegawai["namapegawai"]?></option>
@@ -163,6 +163,7 @@
                             </div>
                             
                             <button type="submit" name="submit" class="btn btn-warning">Simpan</button>
+                            <a href="barang.php" button type="submit" name="submit" class="btn btn-secondary">Batal</a>
                         </form>
                         <!-- form menambah -->
 

@@ -19,7 +19,7 @@
             echo "
                 <script>
                     alert('data gagal ditambahkan');
-                    document.location.href = 'konsumen.php'
+                    document.location.href = 'menambahKonsumen.php'
                 </script>
             ";
         }
@@ -142,6 +142,7 @@
                             </div>
                             
                             <button type="submit" name="submit" class="btn btn-warning">Simpan</button>
+                            <a href="konsumen.php" button type="submit" name="submit" class="btn btn-secondary">Batal</a>
                         </form>
                         <!-- form menambah -->
 

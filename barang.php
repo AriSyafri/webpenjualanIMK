@@ -146,7 +146,7 @@
                             <td><?= $row["namapegawai"]?></td>
                             <td style="text-align: center;">
                                 <!-- <a class="btn btn-secondary">Ubah</a>  -->
-                                <a class="btn btn-secondary" href="mengubahBarang.php?idbarang=<?= $row["idbarang"]; ?>"><i class="bi bi-pencil-fill"></i></a> 
+                                <a class="btn btn-success" href="mengubahBarang.php?idbarang=<?= $row["idbarang"]; ?>"><i class="bi bi-pencil-fill"></i></a> 
                                 <!-- <a class="btn btn-danger"> Hapus</a> -->
                                 <a class="btn btn-danger" href="hapusBarang.php?idbarang=<?= $row["idbarang"]; ?>"onclick="return confirm('yakin?');"><i class="bi bi-trash-fill"></i></a>
                             </td>

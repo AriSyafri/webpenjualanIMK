@@ -12,6 +12,28 @@
     $waktu = $_POST["waktu"];
     $status = $_POST["status"];
 
+
+    if ($idkonsumen == "0") {
+        echo "<script>
+                alert('Pilih konsumen dulu')
+                document.location.href = 'menghitungTransaksi.php'
+            </script>";
+    }
+
+    if ($waktu == "0") {
+        echo "<script>
+                alert('Pilih waktu dulu')
+                document.location.href = 'menghitungTransaksi.php'
+            </script>";
+    }
+
+    if ($status == "0") {
+        echo "<script>
+                alert('Pilih status dulu')
+                document.location.href = 'menghitungTransaksi.php'
+            </script>";
+    }
+
     //menampilkan nama user
     $nama = query("SELECT namakonsumen FROM konsumen WHERE idkonsumen = '$idkonsumen'")[0];
 
@@ -22,7 +44,7 @@
     ON pembelian.idkonsumen = konsumen.idkonsumen
     INNER JOIN inventoribarang
     ON pembelian.idbarang = inventoribarang.idbarang
-    WHERE konsumen.idkonsumen = '$idkonsumen' AND DATE(waktu) = '$waktu' AND STATUS = '$status'");
+    WHERE konsumen.idkonsumen = '$idkonsumen' AND DATE_FORMAT(waktu, '%d %M %Y') = '$waktu' AND STATUS = '$status'");
 
     // menghitung total transaksi
     $biayaTotal = query("SELECT SUM(harga * jumlahbeli) AS 'hargapembelian'
@@ -31,7 +53,7 @@
     ON pembelian.idkonsumen = konsumen.idkonsumen
     INNER JOIN inventoribarang
     ON pembelian.idbarang = inventoribarang.idbarang
-    WHERE konsumen.idkonsumen = '$idkonsumen' AND DATE(waktu) = '$waktu' AND STATUS = '$status'")[0];
+    WHERE konsumen.idkonsumen = '$idkonsumen' AND DATE_FORMAT(waktu, '%d %M %Y') = '$waktu' AND STATUS = '$status'")[0];
 
     if (isset($_POST["bayar"])){
         if(bayarStatusTransaksi($_POST) > 0) {

@@ -118,6 +118,13 @@
         $hp = htmlspecialchars($data["nohp"]);
         $password = mysqli_real_escape_string($conn, $data["pass"]);
         $password2 = mysqli_real_escape_string($conn, $data["pass2"]);
+
+        if ($role == "0") {
+            echo "<script>
+                    alert('Pilih role dulu')
+                </script>";
+            return false;
+        }
     
 
         // memeriksa username
@@ -183,6 +190,15 @@
         $nama = htmlspecialchars($data['namaKonsumen']);
         $hp = htmlspecialchars($data['nohp']);
 
+        $result = mysqli_query($conn, "SELECT namakonsumen FROM konsumen WHERE
+        namakonsumen = '$nama'"); 
+        if( mysqli_fetch_assoc($result) ) {
+            echo "<script>
+                    alert('Nama sudah terdaftar')
+                </script>";
+            return false;
+        }
+
         $query = "INSERT INTO konsumen values 
         ('','$nama', '$hp')";
 
@@ -221,10 +237,33 @@
         $status = htmlspecialchars($data["status"]);
         $jbeli = htmlspecialchars($data["beli"]);
 
+        if ($barang == "0") {
+            echo "<script>
+                    alert('Pilih barang dulu')
+                </script>";
+            return false;
+        }
+        
+        if ($konsumen == "0") {
+            echo "<script>
+                    alert('Pilih konsumen dulu')
+                </script>";
+            return false;
+        }
+
+
         $query = "INSERT INTO pembelian (jumlahbeli, idbarang, idkonsumen, status) values
         ('$jbeli','$barang','$konsumen','$status')";
 
         mysqli_query($conn, $query);
+
+        echo "
+        <script>
+            alert('data telah ditambahkan');
+            document.location.href = 'transaksi.php'
+        </script>
+        ";
+
         return mysqli_affected_rows($conn);
 
     }

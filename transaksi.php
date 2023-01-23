@@ -9,7 +9,7 @@
 
     require 'functions.php';
 
-    $trans = query("SELECT pembelian.idpembelian, namabarang, konsumen.idkonsumen as idkonsumen,namakonsumen, waktu AS wkt,jumlahbeli,status, DATE(waktu) AS waktu ,harga,harga * jumlahbeli AS 'harga pembelian'
+    $trans = query("SELECT pembelian.idpembelian, namabarang, konsumen.idkonsumen as idkonsumen,namakonsumen, waktu AS wkt,jumlahbeli,status, DATE_FORMAT(waktu, '%d %M %Y') AS waktu ,harga,harga * jumlahbeli AS 'harga pembelian'
                     FROM pembelian
                     INNER JOIN konsumen
                     ON pembelian.idkonsumen = konsumen.idkonsumen
@@ -134,7 +134,9 @@
                             <th scope="col">Jumlah Beli</th>
                             <th scope="col">Harga</th>
                             <th scope="col">Status Pembayaran</th>
-                            <th scope="col" style="text-align: center;">Aksi</th>
+                            <?php if ($role == "spv") { ?>
+                                <th scope="col" style="text-align: center;">Aksi</th>
+                            <?php } ?>
                             </tr>
                         </thead>
                         <tbody>
@@ -145,17 +147,21 @@
                             <td><?= $row["namakonsumen"]?></td>
                             <td><?= $row["jumlahbeli"]?></td>
                             <td>RP. <?= $row["harga pembelian"]?></td>
-                            <td><?= $row["status"]?></td>
 
-                            <td style="text-align: center;">
-                                <?php if ($role != "spv") { ?>
-                                    <button type="button" class="btn btn-secondary" disabled><i class="bi bi-pencil-fill"></i></button>
-                                    <button type="button" class="btn btn-danger" disabled><i class="bi bi-trash-fill"></i></button>
-                                <?php } else { ?>
-                                    <a class="btn btn-secondary" href="mengubahTransaksi.php?idpembelian=<?= $row["idpembelian"]; ?>"><i class="bi bi-pencil-fill"></i></a>
-                                    <a class="btn btn-danger" href="hapusTransaksi.php?idpembelian=<?= $row["idpembelian"]; ?>"onclick="return confirm('yakin?');"> <i class="bi bi-trash-fill"></i></a>
-                                <?php }?>
-                            </td>
+                            <?php if ($row["status"] == "belum dibayar") { ?>
+                                <td class="text-danger" ><?= $row["status"]?></td>
+                            <?php } else { ?>
+                                <td><?= $row["status"]?></td>
+                            <?php } ?>
+
+                            <?php if ($role == "spv") { ?>
+                                <td style="text-align: center;">
+                                        <a class="btn btn-success" href="mengubahTransaksi.php?idpembelian=<?= $row["idpembelian"]; ?>"><i class="bi bi-pencil-fill"></i></a>
+                                        <a class="btn btn-danger" href="hapusTransaksi.php?idpembelian=<?= $row["idpembelian"]; ?>"onclick="return confirm('yakin?');"> <i class="bi bi-trash-fill"></i></a>
+                                </td>
+                            <?php } ?>
+
+
                         </tr>
                             <?php endforeach; ?>
                         </tbody>

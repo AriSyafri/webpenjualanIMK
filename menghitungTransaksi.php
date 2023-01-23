@@ -118,7 +118,7 @@
                             <div class="mb-3">
                                 <label for="konsumen" class="form-label">Pilih Konsumen</label>
                                 <select class="form-select" aria-label="Default select example" name="konsumen" id="konsumen">
-                                <option selected>Silahkan Pilih Konsumen</option>
+                                <option  value="0" selected>Silahkan Pilih Konsumen</option>
                                 <?php
                                     $search = mysqli_query($conn, "SELECT * FROM konsumen");
                                     while ($datakonsumen = mysqli_fetch_assoc($search)) :
@@ -131,9 +131,9 @@
                             <div class="mb-3">
                                 <label for="konsumen" class="form-label">Pilih Waktu</label>
                                 <select class="form-select" aria-label="Default select example" name="waktu" id="waktu">
-                                <option selected>Silahkan Pilih Waktu</option>
+                                <option value="0" selected>Silahkan Pilih Waktu</option>
                                 <?php
-                                    $search = mysqli_query($conn, "SELECT DATE(waktu) as waktu FROM pembelian GROUP BY DATE(waktu) ORDER BY DATE(waktu) DESC");
+                                    $search = mysqli_query($conn, "SELECT DATE_FORMAT(waktu, '%d %M %Y') as waktu FROM pembelian GROUP BY DATE(waktu) ORDER BY DATE(waktu) DESC");
                                     while ($datakonsumen = mysqli_fetch_assoc($search)) :
                                 ?>
                                 <option value="<?= $datakonsumen["waktu"]?>"><?= $datakonsumen["waktu"]?></option>
@@ -144,13 +144,14 @@
                             <div class="mb-3">
                                 <label for="pegawai" class="form-label">Pilih Status</label>
                                 <select class="form-select" aria-label="Default select example" name="status" id="status">
-                                <option selected>Silahkan Pilih</option>
+                                <option  value="0" selected>Silahkan Pilih</option>
                                 <option value="belum dibayar">belum dibayar</option>
                                 <option value="dibayar">dibayar</option>
                                 </select>
                             </div>
 
                             <button type="submit" name="submit" class="btn btn-warning">Simpan</button>
+                            <a href="transaksi.php" button type="submit" name="submit" class="btn btn-secondary">Batal</a>
                         </form>
                         <!-- form menambah -->
 

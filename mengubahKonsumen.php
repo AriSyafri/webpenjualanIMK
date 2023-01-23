@@ -152,6 +152,7 @@
                             </div>
                             
                             <button type="submit" name="submit" class="btn btn-warning">Simpan</button>
+                            <a href="konsumen.php" button type="submit" name="submit" class="btn btn-secondary">Batal</a>
                         </form>
                         <!-- form menambah -->
 

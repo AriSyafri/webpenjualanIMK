@@ -25,7 +25,7 @@
             echo "
                 <script>
                     alert('data gagal ditambahkan');
-                    document.location.href = 'pegawai.php'
+                    document.location.href = 'menambahPegawai.php'
                 </script>
             ";
         }
@@ -169,7 +169,7 @@
                             <div class="mb-3">
                                 <label for="pegawai" class="form-label">Pilih Role Pegawai</label>
                                 <select class="form-select" aria-label="Default select example" name="role" id="role">
-                                <option selected>Silahkan Pilih</option>
+                                <option value="0" selected>Silahkan Pilih</option>
                                 <option value="owner">Owner</option>
                                 <option value="kasir">Kasir</option>
                                 <option value="pegawai">Pegawai</option>
@@ -178,6 +178,7 @@
                             </div>
                             
                             <button type="submit" name="submit" class="btn btn-warning">Simpan</button>
+                            <a href="pegawai.php" button type="submit" name="submit" class="btn btn-secondary">Batal</a>
                         </form>
                         <!-- form menambah -->
 

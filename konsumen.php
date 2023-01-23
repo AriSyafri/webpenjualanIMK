@@ -40,8 +40,9 @@
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0" action="" method="post">
                 <div class="input-group">
                     <input class="form-control" type="text" placeholder="Masukkan keyword" name="keyword" aria-label="" aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="cari" type="submit" name="cari"><i class="fas fa-search"></i></button>
+                    <button class="btn btn-search" id="cari" type="submit" name="cari"><i class="fas fa-search"></i></button>
                 </div>           
+
             </form>
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
@@ -134,9 +135,7 @@
                             <td><?= $row["namakonsumen"]?></td>
                             <td><?= $row["nohp"]?></td>
                             <td style="text-align: center;">
-                                <!-- <a class="btn btn-secondary">Ubah</a>  -->
-                                <a class="btn btn-secondary" href="mengubahKonsumen.php?idkonsumen=<?= $row["idkonsumen"]; ?>"><i class="bi bi-pencil-fill"></i></a> 
-                                <!-- <a class="btn btn-danger"> Hapus</a> -->
+                                <a class="btn btn-success" href="mengubahKonsumen.php?idkonsumen=<?= $row["idkonsumen"]; ?>"><i class="bi bi-pencil-fill"></i></a> 
                                 <a class="btn btn-danger" href="hapusKonsumen.php?idkonsumen=<?= $row["idkonsumen"]; ?>"onclick="return confirm('yakin?');"> <i class="bi bi-trash-fill"></i></a>
                             </td>
                         </tr>

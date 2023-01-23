@@ -67,17 +67,17 @@
                             <div class="sb-sidenav-menu-heading">Menu</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseTransaksiPer" aria-expanded="false" aria-controls="collapseTransaksiPer">
                                 <div class="sb-nav-link-icon"><i class="bi bi-cash"></i></div>
-                                Pemasukan Transaksi
+                                Pendapatan
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseTransaksiPer" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="transaksiHari.php">Menampilkan Transaksi Harian</a>
-                                    <a class="nav-link" href="transaksiBulan.php">Menampilkan Transaksi Bulanan</a>
-                                    <a class="nav-link" href="transaksiTahun.php">Menampilkan Transaksi Tahunan</a>
-                                    
-                                </nav>
-                            </div>
+                                </a>
+                                <div class="collapse" id="collapseTransaksiPer" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link" href="transaksiHari.php">Harian</a>
+                                        <a class="nav-link" href="transaksiBulan.php">Bulanan</a>
+                                        <a class="nav-link" href="transaksiTahun.php">Tahunan</a>
+                                        
+                                    </nav>
+                                </div>
 
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
@@ -113,7 +113,7 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Menampilkan Data Transaksi</h1>
+                        <h1 class="mt-4">Pendapatan Harian</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Data Transaksi</li>
                         </ol>
