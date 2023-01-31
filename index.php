@@ -34,7 +34,7 @@
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.html">Toko AnekaSuka</a>
+            <a class="navbar-brand ps-3" href="index.php">Toko AnekaSuka</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -94,19 +94,19 @@
                             <?php }?>
 
                             <?php if ($role == "owner") { ?>
+
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseTransaksiPer" aria-expanded="false" aria-controls="collapseTransaksiPer">
                                 <div class="sb-nav-link-icon"><i class="bi bi-cash"></i></div>
                                 Pendapatan
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                 </a>
                                 <div class="collapse" id="collapseTransaksiPer" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                    <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="transaksiHari.php">Harian</a>
+                                    <nav class="sb-sidenav-menu-nested nav">                                        <a class="nav-link" href="transaksiHari.php">Harian</a>
                                         <a class="nav-link" href="transaksiBulan.php">Bulanan</a>
                                         <a class="nav-link" href="transaksiTahun.php">Tahunan</a>
-                                        
                                     </nav>
                                 </div>
+
 
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePegawai" aria-expanded="false" aria-controls="collapsePegawai">
                                     <div class="sb-nav-link-icon"><i class="bi bi-people"></i></div>
@@ -205,7 +205,7 @@
                             <i class="bi bi-cart"></i>
                             </div>
                             <h5 class="card-title">Jumlah barang</h5>
-                            <div class="display-4"><?= $pegawai["pegawai"];?></div>
+                            <div class="display-4"><?= $barang["barang"];?></div>
                         </div>
                         </div>
 

@@ -7,6 +7,7 @@
         exit;
     }
 
+    $role = $_SESSION["role"];
     $trans = query("SELECT DATE_FORMAT(waktu, '%M %Y') AS waktu ,SUM(harga * jumlahbeli) AS 'jumlah'
                 FROM pembelian
                 INNER JOIN konsumen
@@ -59,25 +60,86 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
+                        <div class="nav">
                             <div class="sb-sidenav-menu-heading">Halaman Utama</div>
                             <a class="nav-link" href="index.php">
                                 <div class="sb-nav-link-icon"><i class="bi bi-house-door-fill"></i></div>
                                 HOME
                             </a>
+
                             <div class="sb-sidenav-menu-heading">Menu</div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseTransaksiPer" aria-expanded="false" aria-controls="collapseTransaksiPer">
+
+                            <?php if ($role == "spv" || $role == "kasir") { ?>
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseTransaksi" aria-expanded="false" aria-controls="collapseTransaksi">
+                                    <div class="sb-nav-link-icon"><i class="bi bi-currency-dollar"></i></div>
+                                    Transaksi
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="collapseTransaksi" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link" href="transaksi.php">Menampilkan Transaksi</a>
+                                        <a class="nav-link" href="menambahTransaksi.php">Menambah Transaksi</a>
+                                        <a class="nav-link" href="menghitungTransaksi.php">Hitung Transaksi</a>
+                                    </nav>
+                                </div>
+
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseKonsumen" aria-expanded="false" aria-controls="collapseInventori">
+                                    <div class="sb-nav-link-icon"><i class="bi bi-people-fill"></i></div>
+                                    Konsumen
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="collapseKonsumen" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link" href="konsumen.php">Menampilkan Konsumen</a>
+                                        <a class="nav-link" href="menambahKonsumen.php">Menambah Konsumen</a>
+                                    </nav>
+                                </div>
+
+                            <?php }?>
+
+                            <?php if ($role == "owner") { ?>
+
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseTransaksiPer" aria-expanded="false" aria-controls="collapseTransaksiPer">
                                 <div class="sb-nav-link-icon"><i class="bi bi-cash"></i></div>
                                 Pendapatan
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                 </a>
                                 <div class="collapse" id="collapseTransaksiPer" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                    <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="transaksiHari.php">Harian</a>
+                                    <nav class="sb-sidenav-menu-nested nav">                                        <a class="nav-link" href="transaksiHari.php">Harian</a>
                                         <a class="nav-link" href="transaksiBulan.php">Bulanan</a>
                                         <a class="nav-link" href="transaksiTahun.php">Tahunan</a>
-                                        
                                     </nav>
                                 </div>
+
+
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePegawai" aria-expanded="false" aria-controls="collapsePegawai">
+                                    <div class="sb-nav-link-icon"><i class="bi bi-people"></i></div>
+                                    Pegawai
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="collapsePegawai" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link" href="pegawai.php">Menampilkan Pegawai</a>
+                                        <a class="nav-link" href="menambahPegawai.php">Menambah Pegawai</a>
+                                    </nav>
+                                </div>
+
+                            <?php }?>
+
+                            <?php if ($role == "pegawai") { ?>
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseInventori" aria-expanded="false" aria-controls="collapseInventori">
+                                    <div class="sb-nav-link-icon"><i class="bi bi-check2-square"></i></div>
+                                    Inventori
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="collapseInventori" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link" href="barang.php">Menampilkan Inventori</a>
+                                        <a class="nav-link" href="menambahBarang.php">Menambah Inventori</a>
+                                    </nav>
+                                </div>
+                            <?php }?>
+
 
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
@@ -106,6 +168,35 @@
                                 </nav>
                             </div>
                         </div>
+                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                        Authentication
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="login.html">Login</a>
+                                            <a class="nav-link" href="register.html">Register</a>
+                                            <a class="nav-link" href="password.html">Forgot Password</a>
+                                        </nav>
+                                    </div>
+                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+                                        Error
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="401.html">401 Page</a>
+                                            <a class="nav-link" href="404.html">404 Page</a>
+                                            <a class="nav-link" href="500.html">500 Page</a>
+                                        </nav>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+
+                        
                     </div>
                 
                 </nav>

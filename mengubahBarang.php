@@ -6,6 +6,8 @@
         header("Location: login.php");
         exit;
     }
+
+    $role = $_SESSION["role"];
     
     $var = $_GET["idbarang"];
     $barang = query("SELECT * FROM inventoribarang WHERE idbarang = '$var'")[0];
